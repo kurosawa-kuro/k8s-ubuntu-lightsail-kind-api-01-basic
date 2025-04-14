@@ -174,20 +174,6 @@ curl -v http://localhost:8080/
 # => {"health":"ok"} などアプリのレスポンスが得られる想定
 ```
 
-### 3-3. Pod 内部から直接 curl
-
-もしコンテナ内部からの動作を確認したい場合は、Pod に入って直接 `curl localhost:8080` でも OK です。  
-ただし、`/bin/sh` などが備わっているイメージでない場合は利用できません。
-
-```bash
-# busybox 等のツールがある Pod があれば流用
-# あるいは別途 test 用の Pod を立ち上げる
-kubectl run testpod --image=busybox:stable --restart=Never -it -- /bin/sh
-
-# (testpod 内で)
-wget -qO- http://container-nodejs-api.default.svc.cluster.local:8080/
-```
-
 ---
 
 ## 4️⃣ 片付け
