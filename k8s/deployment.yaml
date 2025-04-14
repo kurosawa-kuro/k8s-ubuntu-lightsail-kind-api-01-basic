@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-nodejs-api
+  labels:
+    app: container-nodejs-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-nodejs-api
+  template:
+    metadata:
+      labels:
+        app: container-nodejs-api
+    spec:
+      # ECR 認証に必要な Secret がある場合は指定
+      # imagePullSecrets:
+      # - name: regcred
+      containers:
+      - name: container-nodejs-api
+        image: 986154984217.dkr.ecr.ap-northeast-1.amazonaws.com/container-nodejs-api-8080:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: container-nodejs-api
+spec:
+  selector:
+    app: container-nodejs-api
+  # ClusterIP のみ
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8080    # Service 上のポート
+      targetPort: 8080  # コンテナのポート
